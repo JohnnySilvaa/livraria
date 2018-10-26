@@ -6,6 +6,8 @@ import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.Singleton;
 import javax.ejb.Startup;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 
 import br.com.caelum.livraria.modelo.Autor;
 import br.com.caelum.livraria.modelo.Livro;
@@ -20,6 +22,10 @@ public class Banco {
 	public static List<Autor> autores = new ArrayList<Autor>();
 	public static List<Usuario> usuarios = new ArrayList<Usuario>();
 	
+	
+	@PersistenceContext
+	EntityManager manager;
+	
 	private static int chave = 1;
 	
 	static {
@@ -31,13 +37,13 @@ public class Banco {
 		livros.add(livro);
 	}
 	
-	public List<Livro> listaLivros() {
-		return livros;
+	public List<Autor> listaLivros() {
+		return manager.createQuery("select a from Autor a", Autor.class).getResultList();
 	}
 	
 	public void save(Autor autor) {
-		autor.setId(chave++);
-		autores.add(autor);
+		manager.persist(autor);
+
 	}
 	
 	public List<Autor> listaAutores() {
@@ -46,12 +52,8 @@ public class Banco {
 
 	public Autor buscaPelaId(Integer autorId) {
 
-		for (Autor autor : autores) {
-			if(autor.getId().equals(autorId)) {
-				return autor;
-			}
-		}
-		return null;
+		return manager.find(Autor.class, autorId);
+
 	}
 	
 	public Usuario buscaPeloNome(String nome) {
