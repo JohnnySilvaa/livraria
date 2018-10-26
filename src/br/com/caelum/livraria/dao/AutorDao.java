@@ -23,6 +23,10 @@ public class AutorDao {
     @TransactionAttribute(TransactionAttributeType.REQUIRES_NEW)
 	public void salva(Autor autor) {
 		manager.persist(autor);
+		
+		
+//		throw new RuntimeException("Serviço externo deu erro!");
+
 	}
 
 	public List<Autor> todosAutores() {

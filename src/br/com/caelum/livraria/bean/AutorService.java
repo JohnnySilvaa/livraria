@@ -17,10 +17,11 @@ public class AutorService {
     AutorDao dao;
 
     @TransactionAttribute(TransactionAttributeType.REQUIRED)
-    public void adiciona(Autor autor) {
+    public void adiciona(Autor autor){
         this.dao.salva(autor);
-        throw new RuntimeException(
-                "[ERRO] Erro lançado para testar o rollback da transação.");
+        
+        throw new LivrariaException();
+
     }
     
     public List<Autor> todosAutores() {
