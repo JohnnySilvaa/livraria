@@ -16,12 +16,9 @@ public class AutorService {
     @Inject
     AutorDao dao;
 
-    @TransactionAttribute(TransactionAttributeType.REQUIRED)
     public void adiciona(Autor autor){
         this.dao.salva(autor);
         
-        throw new LivrariaException();
-
     }
     
     public List<Autor> todosAutores() {
