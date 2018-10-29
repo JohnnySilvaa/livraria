@@ -19,6 +19,13 @@
 				br.com.caelum.livraria.interceptador.LogInterceptador
 			</interceptor-class>
 		</interceptor-binding>
+		
+		<interceptor-binding>
+			<ejb-name>LivroDao</ejb-name>
+			<interceptor-class>
+				br.com.caelum.livraria.interceptador.LogInterceptador
+			</interceptor-class>
+		</interceptor-binding>
 	</assembly-descriptor>
 
 </ejb-jar>

@@ -3,8 +3,6 @@ package br.com.caelum.livraria.bean;
 import java.util.List;
 
 import javax.ejb.Stateless;
-import javax.ejb.TransactionAttribute;
-import javax.ejb.TransactionAttributeType;
 import javax.inject.Inject;
 
 import br.com.caelum.livraria.dao.AutorDao;
@@ -24,4 +22,8 @@ public class AutorService {
     public List<Autor> todosAutores() {
         return this.dao.todosAutores();
     }
+    
+	public Autor pesquisar(Integer autorId) {
+		return this.dao.buscaPelaId(autorId);
+	}
 }
