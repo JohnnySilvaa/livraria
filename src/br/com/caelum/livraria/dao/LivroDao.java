@@ -3,8 +3,6 @@ package br.com.caelum.livraria.dao;
 import java.util.List;
 
 import javax.ejb.Stateless;
-import javax.ejb.TransactionAttribute;
-import javax.ejb.TransactionAttributeType;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
@@ -13,22 +11,16 @@ import br.com.caelum.livraria.modelo.Livro;
 
 @Stateless
 public class LivroDao {
-
-	
 	@PersistenceContext
-	EntityManager manager;
-	
-	
-    @TransactionAttribute(TransactionAttributeType.REQUIRES_NEW)
+	private EntityManager manager;
+
 	public void salva(Livro livro) {
-        manager.persist(livro);
+		manager.persist(livro);
 	}
-	
+
 	public List<Livro> todosLivros() {
-		 return manager.createQuery("select l from Livro l", Livro.class)
-	                .getResultList();
+		return manager.createQuery("select l from Livro l", Livro.class).getResultList();
 	}
-	
 
 	public List<Livro> livrosPeloNome(String nome) {
 
@@ -38,5 +30,4 @@ public class LivroDao {
 
 		return query.getResultList();
 	}
-	
 }
